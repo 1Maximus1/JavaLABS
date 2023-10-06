@@ -8,18 +8,14 @@ public class StringCalculator
 		if(numbers.isEmpty()){
 			return 0;
 		}
+		String numbersWithoutSpaces = numbers.replaceAll("\\s", "");
 		String[] numbers1 = numbers.split(",");
 		int sum = 0;
 
-		if (numbers1.length <= 2)
-		{
 			for (String number : numbers1) {
 					int num = Integer.parseInt(number.trim());
 					sum += num;
 			}
-		}else{
-			return -1;
-		}
 
 		return sum;
 
