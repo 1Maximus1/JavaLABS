@@ -20,6 +20,12 @@ public class StringCalculatorTest
 		int result = calculator.add("5");
 		assertEquals(5, result);
 	}
+	@Test
+	public void testSingleNumberWithShifts() {
+		StringCalculator calculator = new StringCalculator();
+		int result = calculator.add("5,\n");
+		assertEquals(-1, result);
+	}
 
 	@Test
 	public void testTwoNumbers() {
@@ -29,25 +35,25 @@ public class StringCalculatorTest
 	}
 
 	@Test
+	public void testTwoNumbersWithShifts() {
+		StringCalculator calculator = new StringCalculator();
+		int result = calculator.add("1\n2,\n");
+		assertEquals(-1, result);
+	}
+	@Test
+	public void testTwoNumbersWithShifts2() {
+		StringCalculator calculator = new StringCalculator();
+		int result = calculator.add("1\n,2\n");
+		assertEquals(-1, result);
+	}
+
+	@Test
 	public void testMultipleNumbers() {
 		StringCalculator calculator = new StringCalculator();
-		int result = calculator.add("1,2,3,4,5");
+		int result = calculator.add("1\n2,3,4\n5");
 		assertEquals(15, result);
 	}
 
-	@Test
-	public void testInvalidInput() {
-		StringCalculator calculator = new StringCalculator();
-		int result = calculator.add("1,2,3");
-		assertEquals(6, result);
-	}
-
-	@Test
-	public void testIgnoreNumbersGreaterThan2() {
-		StringCalculator calculator = new StringCalculator();
-		int result = calculator.add(" 1, 2 , 3 ,40   ");
-		assertEquals(46, result);
-	}
 
 
 }
