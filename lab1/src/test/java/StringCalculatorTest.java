@@ -79,4 +79,16 @@ public class StringCalculatorTest
 		assertThrows(IllegalArgumentException.class, () -> calculator.add(input));
 	}
 
+	@Test
+	public void testMultipleNumbersWith1000() {
+		StringCalculator calculator = new StringCalculator();
+		int result = calculator.add("999,1000,1001,100000");
+		assertEquals(1999, result);
+	}
+	@Test
+	public void testMultipleNumbersAndSpecifiedSeparatorWith1000() {
+		StringCalculator calculator = new StringCalculator();
+		int result = calculator.add("//\n\n1\n12\n3\n50\n1000\n10012");
+		assertEquals(1066, result);
+	}
 }
