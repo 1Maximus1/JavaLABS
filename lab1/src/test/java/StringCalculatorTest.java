@@ -46,17 +46,37 @@ public class StringCalculatorTest
 	}
 
 	@Test
-	public void testMultipleNumbersWithDotAndComma() {
+	public void testMultipleNumbersWithDotAndCommaAndSpecifiedSeparator() {
 		StringCalculator calculator = new StringCalculator();
 		int result = calculator.add("//;\n1;2");
 		assertEquals(3, result);
 	}
 
 	@Test
-	public void testMultipleNumbersWithSpaces() {
+	public void testMultipleNumbersWithSpacesAndSpecifiedSeparator() {
 		StringCalculator calculator = new StringCalculator();
 		int result = calculator.add("//\n\n1\n2\n3\n50");
 		assertEquals(56, result);
+	}
+
+	@Test
+	public void testMultipleNegativeNumbers() {
+		StringCalculator calculator = new StringCalculator();
+		String input = ("1,-3,-4,-5,3,1");
+		assertThrows(IllegalArgumentException.class, () -> calculator.add(input));
+	}
+
+	@Test
+	public void testMultipleNegativeNumbersWithSpaces() {
+		StringCalculator calculator = new StringCalculator();
+		String input = ("1\n-3\n-4,-5,3,1");
+		assertThrows(IllegalArgumentException.class, () -> calculator.add(input));
+	}
+	@Test
+	public void testMultipleNegativeNumbersAndSpecifiedSeparator() {
+		StringCalculator calculator = new StringCalculator();
+		String input = ("//\n\n1\n-12\n3\n-50");
+		assertThrows(IllegalArgumentException.class, () -> calculator.add(input));
 	}
 
 }
