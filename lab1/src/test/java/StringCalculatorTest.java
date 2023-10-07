@@ -62,7 +62,7 @@ public class StringCalculatorTest
 	@Test
 	public void testMultipleNegativeNumbers() {
 		StringCalculator calculator = new StringCalculator();
-		String input = ("1,-3,-4,-5,3,1");
+		String input = ("-1,-3,-4,-5,3,1");
 		assertThrows(IllegalArgumentException.class, () -> calculator.add(input));
 	}
 
@@ -90,5 +90,43 @@ public class StringCalculatorTest
 		StringCalculator calculator = new StringCalculator();
 		int result = calculator.add("//\n\n1\n12\n3\n50\n1000\n10012");
 		assertEquals(1066, result);
+	}
+
+	@Test
+	void testCustomDelimiterThatConsistOfThreeCharacters() {
+		StringCalculator calculator = new StringCalculator();
+		int actual = calculator.add("//[+++]\n5+++3+++6");
+		Assertions.assertEquals(14, actual);
+	}
+
+	@Test
+	void testCustomDelimiterThatConsistOfSixCharacters() {
+		StringCalculator calculator = new StringCalculator();
+		int actual = calculator.add("//[******]\n5******3******6******4");
+		Assertions.assertEquals(18, actual);
+	}
+	@Test
+	void testCustomDelimiterThatConsistOfThreeCharacters2() {
+		StringCalculator calculator = new StringCalculator();
+		int actual = calculator.add("//[***]\n1***2***3");
+		Assertions.assertEquals(6, actual);
+	}
+	@Test
+	void testCustomDelimiterThatConsistOfTwoCharactersWithComma() {
+		StringCalculator calculator = new StringCalculator();
+		int actual = calculator.add("//[,,]\n10,,10,,10,,10");
+		Assertions.assertEquals(40, actual);
+	}
+	@Test
+	void testCustomDelimiterThatConsistOfTwoCharactersWithShifts() {
+		StringCalculator calculator = new StringCalculator();
+		int actual = calculator.add("//[\n\n]\n10\n\n10\n\n10\n\n10");
+		Assertions.assertEquals(40, actual);
+	}
+	@Test
+	public void throwIllegalArgumentExceptionIfDelimiterFollowByAnotherDelimiter() {
+		StringCalculator calculator = new StringCalculator();
+		String input = ("//[++]\n4++18,5++4++,2");
+		assertThrows(IllegalArgumentException.class, () -> calculator.add(input));
 	}
 }
