@@ -8,8 +8,8 @@ public class StringCalculator
 			return 0;
 		}
 
-		if (numbers.contains(",\n") || numbers.contains("\n,")) {
-			return -1;
+		if (numbers.contains(",\n") || numbers.contains("\n,") || numbers.contains(",,") || numbers.contains("\n\n")) {
+			throw new IllegalArgumentException("Error: Two delimiters are following each other!");
 		}
 
 		String[] numbersArray = numbers.split("[,\n]");

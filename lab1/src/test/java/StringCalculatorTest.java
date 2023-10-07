@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StringCalculatorTest
 {
@@ -20,12 +21,7 @@ public class StringCalculatorTest
 		int result = calculator.add("5");
 		assertEquals(5, result);
 	}
-	@Test
-	public void testSingleNumberWithShifts() {
-		StringCalculator calculator = new StringCalculator();
-		int result = calculator.add("5,\n");
-		assertEquals(-1, result);
-	}
+
 
 	@Test
 	public void testTwoNumbers() {
@@ -34,17 +30,12 @@ public class StringCalculatorTest
 		assertEquals(10, result);
 	}
 
+
 	@Test
-	public void testTwoNumbersWithShifts() {
+	public void testIllegalArgumentException() {
 		StringCalculator calculator = new StringCalculator();
-		int result = calculator.add("1\n2,\n");
-		assertEquals(-1, result);
-	}
-	@Test
-	public void testTwoNumbersWithShifts2() {
-		StringCalculator calculator = new StringCalculator();
-		int result = calculator.add("1\n,2\n");
-		assertEquals(-1, result);
+		String input = "1,\n2";
+		assertThrows(IllegalArgumentException.class, () -> calculator.add(input));
 	}
 
 	@Test
