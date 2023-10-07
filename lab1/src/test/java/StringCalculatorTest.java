@@ -26,8 +26,8 @@ public class StringCalculatorTest
 	@Test
 	public void testTwoNumbers() {
 		StringCalculator calculator = new StringCalculator();
-		int result = calculator.add("3,7");
-		assertEquals(10, result);
+		int result = calculator.add("3,7,4,5");
+		assertEquals(19, result);
 	}
 
 
@@ -45,6 +45,18 @@ public class StringCalculatorTest
 		assertEquals(15, result);
 	}
 
+	@Test
+	public void testMultipleNumbersWithDotAndComma() {
+		StringCalculator calculator = new StringCalculator();
+		int result = calculator.add("//;\n1;2");
+		assertEquals(3, result);
+	}
 
+	@Test
+	public void testMultipleNumbersWithSpaces() {
+		StringCalculator calculator = new StringCalculator();
+		int result = calculator.add("//\n\n1\n2\n3\n50");
+		assertEquals(56, result);
+	}
 
 }
