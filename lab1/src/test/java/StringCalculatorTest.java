@@ -173,6 +173,7 @@ public class StringCalculatorTest
 		int result = stringCalculator.add("//[,,]\n10,,10,,10,,10");
 		Assertions.assertEquals(40, result);
 	}
+
 	@Test
 	void testCustomDelimiterThatConsistOfTwoCharactersWithShifts() {
 		int result = stringCalculator.add("//[\n\n]\n10\n\n10\n\n10\n\n10");
@@ -212,6 +213,29 @@ public class StringCalculatorTest
 	assertThrows(IllegalArgumentException.class,() -> stringCalculator.add(input));
 	}
 
+	@Test
+	public void testCustomFourDelimitersThatConsistMultipleCharacters_2(){
+		assertEquals(19, stringCalculator.add("//[*][%]\n2*3%7,6\n1"));
+	}
 
+	@Test
+	public void testCustomFourDelimitersThatConsistMultipleCharacters_3(){
+		assertEquals(20, stringCalculator.add("//[*][%][&]\n2*3%7&1,6\n1"));
+	}
+
+	@Test
+	public void testCustomFourDelimitersThatConsistMultipleCharacters_4(){
+		assertEquals(41, stringCalculator.add("//[+++][%][%%][&][***]\n2***3%%7&1,6\n1%1+++20"));
+	}
+
+	@Test
+	public void testCustomFourDelimitersThatConsistMultipleCharacters_5(){
+		assertEquals(78, stringCalculator.add("//[????][%]\n2????3%1,6\n1,65"));
+	}
+
+	@Test
+	public void testCustomFourDelimitersThatConsistMultipleCharacters_6(){
+		assertEquals(1004,stringCalculator.add("//[+][+++][++]\n1+++1001+1\n1++1,1000"));
+	}
 
 }
