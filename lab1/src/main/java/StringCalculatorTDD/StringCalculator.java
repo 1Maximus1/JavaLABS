@@ -71,7 +71,20 @@ public class StringCalculator {
 
 				numbersArrayFin = numbers.split(",");
 				checkDuplicateOfCommas(numbers);
-				return sumOfStrings(numbersArrayFin,negativeNumbers);
+				int sum = sumOfStrings(numbersArrayFin,negativeNumbers);
+				if (negativeNumbers.isEmpty()) {
+					return sum;
+				} else {
+					StringBuilder message = new StringBuilder("Error: negative numbers are not allowed: ");
+					for (int i = 0; i < negativeNumbers.size(); i++) {
+						message.append(negativeNumbers.get(i));
+						if (i < negativeNumbers.size() - 1) {
+							message.append(", ");
+						}
+					}
+					throw new IllegalArgumentException(message.toString());
+				}
+
 
 
 			} else if (allDelimiters.toArray().length == 1) {
@@ -203,5 +216,3 @@ public class StringCalculator {
 
 
 }
-
-
